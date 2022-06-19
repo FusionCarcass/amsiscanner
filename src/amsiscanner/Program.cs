@@ -116,9 +116,9 @@ namespace AmsiScanner {
 
         public static int HandleScanCommand(FileInfo path) {
             byte[] contents = Utility.ReadAllBytes(path.FullName);
-            string text = default(string);
-            AmsiResult result = default(AmsiResult);
+            AmsiResult result = default;
             using (AmsiSession session = new AmsiSession()) {
+                string text;
                 if (Utility.TryGetText(contents, out text)) {
                     result = session.ScanString(text);
                 } else {
@@ -155,7 +155,7 @@ namespace AmsiScanner {
         public static void OnIterationByCharComplete(int iteration, int stepSize, int nSteps, string delta) {
             string output = string.Format("Iteration: {0} Steps: {1} StepSize: {2} Length: {3} Delta: ", iteration, nSteps, stepSize, delta.Length);
             int max = Utility.ConsoleWidth - output.Length - 5;
-            string final = null;
+            string final;
             if (max < 0) {
                 final = output;
             } else if(delta.Length > max) {
@@ -209,7 +209,7 @@ namespace AmsiScanner {
         private static void OnIterationByTokenComplete(int iteration, int nSteps, int stepSize, string deltaString, Token[] deltaToken) {
             string output = string.Format("Iteration: {0}\tSteps: {1}\tStepSize: {2}\tLength: {3}\tDelta: ", iteration, nSteps, stepSize, deltaToken.Length);
             int max = Utility.ConsoleWidth - output.Length - 5;
-            string final = null;
+            string final;
             if (max < 0) {
                 final = output;
             } else if (deltaString.Length > max) {

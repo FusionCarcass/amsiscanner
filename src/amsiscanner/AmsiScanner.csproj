@@ -73,7 +73,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AmeiScan.Common\AmsiScanner.Common.csproj">
+    <ProjectReference Include="..\AmsiScan.Common\AmsiScanner.Common.csproj">
       <Project>{f86622ff-0689-4120-9326-d611b0c63b69}</Project>
       <Name>AmsiScanner.Common</Name>
     </ProjectReference>
