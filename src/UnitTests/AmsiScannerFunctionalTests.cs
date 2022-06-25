@@ -13,8 +13,6 @@ namespace UnitTests {
         public void Encrypt() {
             using (TemporaryFile src = new TemporaryFile()) {
                 using (TemporaryFile dst = new TemporaryFile()) {
-                    
-
                     string arguments = string.Format("encrypt \"{0}\" \"{1}\"", src.FileInfo.FullName, dst.FileInfo.FullName);
                     ProcessOutput output = ProcessOutput.Run("amsiscanner", arguments);
                     Assert.IsTrue(string.IsNullOrEmpty(output.StandardOutput), output.StandardOutput);

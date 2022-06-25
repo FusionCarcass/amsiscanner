@@ -165,7 +165,7 @@ namespace AmsiScanner.Common {
             }
         }
 
-        public static byte[] ReadAllBytes(string path) {
+        public static byte[] ReadAllBytes(string path, string password = Utility.DEFAULT_PASSWORD) {
             path = Path.GetFullPath(path);
             if (!File.Exists(path)) {
                 throw new FileNotFoundException(path);
@@ -177,16 +177,16 @@ namespace AmsiScanner.Common {
             }
 
             byte[] contents = File.ReadAllBytes(path);
-            if (Utility.TryReadEncryptedFileBytes(contents, out unpacked)) {
+            if (Utility.TryReadEncryptedFileBytes(contents, out unpacked, password)) {
                 return unpacked;
             }
 
             return contents;
         }
 
-        public static bool TryReadEncryptedFileBytes(byte[] data, out byte[] unpacked) {
+        public static bool TryReadEncryptedFileBytes(byte[] data, out byte[] unpacked, string password = Utility.DEFAULT_PASSWORD) {
             try {
-                using (MemoryStream memoryStream = new MemoryStream(Utility.Decrypt(data, Utility.DEFAULT_PASSWORD))) {
+                using (MemoryStream memoryStream = new MemoryStream(Utility.Decrypt(data, password))) {
                     unpacked = memoryStream.ToArray();
                 }
                 return true;

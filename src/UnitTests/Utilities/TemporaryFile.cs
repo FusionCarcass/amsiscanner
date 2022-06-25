@@ -21,12 +21,21 @@ namespace UnitTests.Utilities {
         }
 
         public TemporaryFile(int filesize = 4096) {
+            this.Initialize(Path.GetTempPath(), filesize);
+        }
+
+        public TemporaryFile(string directory, int filesize = 4096) {
+            this.Initialize(directory, filesize);
+        }
+
+        private void Initialize(string directory, int filesize) {
             if (filesize < 0) {
                 throw new ArgumentOutOfRangeException("FileSize", "FileSize must be greater than or equal to zero.");
             }
 
             try {
-                this.FileInfo = new FileInfo(Path.GetTempFileName());
+                string path = Path.Combine(directory, Guid.NewGuid().ToString().Replace("-", string.Empty) + ".tmp");
+                this.FileInfo = new FileInfo(path);
 
                 if (filesize > 0) {
                     Random random = new Random();
@@ -36,7 +45,7 @@ namespace UnitTests.Utilities {
                 } else {
                     this.OriginalContents = new byte[0];
                 }
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 try {
                     if (this.FileInfo.Exists) {
                         this.FileInfo.Delete();

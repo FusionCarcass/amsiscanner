@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,10 @@
     <Compile Include="AmsiScanResult.cs" />
     <Compile Include="Benchmark.cs" />
     <Compile Include="Classes\SigfindByTokenResults.cs" />
+    <Compile Include="Cmdlets\DecryptFile.cs" />
+    <Compile Include="Cmdlets\DecryptString.cs" />
+    <Compile Include="Cmdlets\EncryptFile.cs" />
+    <Compile Include="Cmdlets\EncryptString.cs" />
     <Compile Include="Cmdlets\InvokeAmsiScan.cs" />
     <Compile Include="Cmdlets\InvokeSigfind.cs" />
     <Compile Include="Extensions.cs" />
