@@ -11,8 +11,8 @@ Scan files with the Anti-Malware Scan Interface (AMSI) and minimize malicious te
 
 # Dependencies
 
-- Windows 7+
-- .NET Framework 4.8
+- Windows 10+
+- .NET 6.0
 
 # AmsiScanner.exe Usage
 

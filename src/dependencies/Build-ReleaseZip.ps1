@@ -15,7 +15,7 @@ function Create-Directory {
 #Setup paths
 $current = New-Object System.IO.DirectoryInfo($PSScriptRoot);
 $root = $current.Parent;
-$binsrc = [System.IO.Path]::Combine($root.FullName, "builds", "release", "any");
+$binsrc = [System.IO.Path]::Combine($root.FullName, "AmsiScanner", "bin", "release", "net6.0");
 $release = [System.IO.Path]::Combine($root.FullName, "release");
 $samples_src = [System.IO.Path]::Combine($current.FullName, "samples");
 $samples_dst = [System.IO.Path]::Combine($release, "samples");
@@ -30,10 +30,15 @@ Create-Directory $release
 Create-Directory $samples_dst
 
 #Copy binaries over
-$files = @("AmsiScanner.Common.dll", "AmsiScanner.exe", "AmsiScanner.exe.config", "System.Buffers.dll", "System.CommandLine.dll", "System.CommandLine.NamingConventionBinder.dll", "System.Memory.dll", "System.Numerics.Vectors.dll", "System.Runtime.CompilerServices.Unsafe.dll");
+$files = @("AmsiScanner.Common.dll", "AmsiScanner.exe", "AmsiScanner.dll", "AmsiScanner.runtimeconfig.json", "System.CommandLine.dll", "System.CommandLine.NamingConventionBinder.dll");
 foreach($file in $files) {
     Copy-Item ([System.IO.Path]::Combine($binsrc, $file)) $release -Force;
 }
+
+#Copy System.Management.Automation.dll
+$SMAPath = [System.IO.Path]::Combine($root.FullName, "AmsiScanner", "bin", "Release", "net6.0", "runtimes", "win", "lib", "net6.0", "System.Management.Automation.dll")
+Copy-Item $SMAPath $release -Force
+#"C:\Users\helpdesk\Desktop\Workspace\AmsiScanner\src\AmsiScanner\bin\Release\net6.0\runtimes\win\lib\net6.0\System.Management.Automation.dll"
 
 #Copy samples over
 $files = gci $samples_src -File

@@ -22,7 +22,7 @@ namespace UnitTests.Utilities {
 
         public static string SamplesDirectory {
             get {
-                string top = Directory.GetParent(TestPaths.AssemblyDirectory).Parent.Parent.FullName;
+                string top = Directory.GetParent(TestPaths.AssemblyDirectory).Parent.Parent.Parent.FullName;
                 return Path.Combine(top, "dependencies", "samples");
             }
         }
